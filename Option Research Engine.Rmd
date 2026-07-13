@@ -1,5 +1,5 @@
 ---
-title: "Monte Carlo Analysis of Stocks for Trading"
+title: "Monte Carlo Analysis of Options"
 author: "Kai Calvadores"
 date: "2026-06-14"
 output: html_document
