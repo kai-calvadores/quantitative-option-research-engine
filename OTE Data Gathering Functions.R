@@ -1,4 +1,4 @@
-# This code is for gathering the data from the market and having synthetic data for my option trading engine.
+# This code is for gathering the data from the market and having synthetic data for my option research engine.
 
 Real_Option_Chain = function(ticker){
   library(quantmod)
