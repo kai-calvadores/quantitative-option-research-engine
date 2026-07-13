@@ -1,4 +1,4 @@
-# This code is for performing statistical analysis on the data and ranking strategies for my option trading engine.
+# This code is for performing statistical analysis on the data and ranking strategies for my option research engine.
 
 Trade_Summary = function(results){
   summary.results = data.frame()
