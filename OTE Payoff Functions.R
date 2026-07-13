@@ -1,4 +1,4 @@
-# This code is for the Payoff functions for my options trading engine
+# This code is for the Payoff functions for my options research engine.
 
 covered_call = function(S, S.0, long.contract = NULL, short.contract){
   K = short.contract$Strike
