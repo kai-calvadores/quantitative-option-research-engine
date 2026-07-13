@@ -5,6 +5,8 @@ The Quantitative Option Research Engine is a modular framework, written in R, fo
 
 Rather than attempting to predict exact stock market prices, this research engine models thousands of possible future market outcomes and evaluates how different option strategies perform across those simulated scenarios. The goal is to identify trading strategies with favorable expected risk-adjusted returns, while also providing a flexible architecture for comparing various market models.
 
+If you want a run-through of the research engine, look at the Option_Research_Engine.Rmd file. 
+
 CURRENT FEATURES
 
   - Download historical stock market data for multiple stocks and ETF's
