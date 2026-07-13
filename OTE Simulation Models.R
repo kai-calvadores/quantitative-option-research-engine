@@ -1,4 +1,4 @@
-# This code is for the different simulation models for my option trading engine.
+# This code is for the different simulation models for my option research engine.
 
 GBM_MC = function(asset.data, asset.state, horizon, steps, iters){
   S.0 = asset.data$current.price
