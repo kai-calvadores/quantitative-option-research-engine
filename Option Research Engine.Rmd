@@ -4,6 +4,15 @@ author: "Kai Calvadores"
 date: "2026-06-14"
 output: html_document
 ---
+# This notebook shows the complete workflow of the Quantitative Option Research Engine:
+
+1. Download market data
+2. Retrieve option chain data
+3. Evaluate the current market state
+4. Simulate future asset prices using Monte Carlo simulation and a GBM pricing model
+5. Generate option strategies
+6. Evaluate strategy performance
+7. Rank strategies by risk-adjusted metrics
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
