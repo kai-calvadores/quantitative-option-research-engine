@@ -1,0 +1,58 @@
+---
+title: "Monte Carlo Analysis of Stocks for Trading"
+author: "Kai Calvadores"
+date: "2026-06-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Strategy Functions
+```{r}
+rm(list = ls())
+source("OTE Data Gathering Functions.R")
+source('OTE Payoff Functions.R')
+source('OTE Simulation Models.R')
+source('OTE Evaluation Functions.R')
+source('OTE Generation Functions.R')
+```
+
+# Strategy Map
+```{r}
+strategy.registry = list(Long_Call = list(name = "Long_Call", legs = 1, generator = LC_Generation, payoff = long_call), Long_Put = list(name = "Long_Put", legs = 1, generator = LP_Generation, payoff = long_put), Covered_Call = list(name = "Covered_Call", legs = 1, generator = CC_Generation, payoff = covered_call), Cash_Secured_Put = list(name = "Cash_Secured_Put", legs = 1, generator = CSP_Generation, payoff = cash_secured_put), Bull_Call_Spread = list(name = "Ball_Call_Spread", legs = 2, generator = BCS_Generation, payoff = bull_call_spread), Bear_Put_Spread = list(names = "Bear_Put_Spread", legs = 2, generator = BPS_Generation, payoff = bear_put_spread))
+
+research.parameters = list(Min.Days = 30, Max.Days = 60, Strike.Range = .15)
+
+quality.filters = list(Minimum.Volume = 25, Minimum.Open.Interest = 100, Minimum.IV = .05, Maximum.IV = 2)
+```
+
+# Pipeline
+```{r}
+universe = c("AAPL", "NVDA")
+
+market.data = Get_Data(universe)
+market.state = Market_State(market.data)
+engine.results = list()
+
+for(ticker in names(market.data)){
+  asset.data = market.data[[ticker]]
+  asset.data$option.chain = Candidate_Universe(asset.data, research.parameters, quality.filters)
+  if(is.null(asset.data$option.chain) || nrow(asset.data$option.chain) == 0){
+    next
+  }
+  asset.state = market.state[[ticker]]
+  simulation = GBM_MC(asset.data, asset.state, horizon = 45, steps = 45, iters = 10000)
+  strategies = Generate_Strategies(asset.data, strategy.registry)
+  if(nrow(strategies) == 0){
+    next
+  }
+  results = Evaluate_Strategies(strategies, simulation, asset.data, strategy.registry)
+  summary = Trade_Summary(results)
+  rankings = Rank_Strategies(summary)
+  
+  engine.results[[ticker]] = list(simulation = simulation, strategies = strategies, results = results, summary = summary, rankings = rankings)
+  print(rankings)
+}
+```
