@@ -10,15 +10,15 @@ CURRENT FEATURES
   - Download historical stock market data for multiple stocks and ETF's
   - Retrieve real option chain data
   - Evaluate the current statistical state of the market
-  - Simulate future asset prices using a Geometric Brownian Motion (GBM) model
-  - Automatically generate option strategies from the option chain
+  - Simulate thousands of possible future asset prices using a Monte Carlo Geometric Brownian Motion (GBM) model
+  - Automatically generate option strategies from the option chain (like covered calls, cash-secured puts, Bull Call Spread
   - Evaluate strategy profit and loss across Monte Carlo simulations
   - Compute summary statistics including expected profit, probability of profit, median profit, quantiles, and Value at Risk (VaR)
-  - Rank strategies based on expected performance
+  - Rank strategies based on expected return, probability of profit, Value at Risk, and additional statistical performance metrics.
 
 PLANNED FEATURES
 
-  - Additional stochastic models
+  - Additional stochastic simulation models
       - Jump Diffusion
       - Variance Gamma
       - Heston
@@ -35,7 +35,28 @@ PLANNED FEATURES
 
 PROJECT STRUCTURE
 
-The project is organized into modular components so that market data collection, market state evaluation, stochastic simulation models, strategy generation, evaluation, ranking, and future predictive models can be developed independently without modifying the overall architecture. 
+Historical Data -> Get_Data() -> Market_State() -> Simulation_Models(GBM, VG [planned], Heston [planned]) -> Generate_Strategies() -> Evaluate_Strategies() -> Trade_Summary() -> Rank_Strategies() -> Future Learning Models
+
+The project is organized into modular components so that market data collection, market state evaluation, stochastic simulation models, strategy generation, evaluation, ranking, and future predictive models can be developed independently. This modular structure allows the platform to change, add new strategies, and add new models without needing to restructure the entire code. 
+
+TECHNOLOGIES
+
+  - R
+  - Monte Carlo Simulation
+  - Risk Analysis
+  - Option Pricing
+  - Black-Scholes Pricing
+  - Statistical Modeling
+  - quantmod
+  - xts
+
+EXAMPLE OUTPUT
+
+Ticker   Strategy            Exp Return   POP
+
+AAPL     Bull Call Spread      13.1%      29.9%
+AAPL     Long Call              6.4%      22.5%
+NVDA     Bull Call Spread      97.2%      53.5%
 
 LONG-TERM GOAL
 
