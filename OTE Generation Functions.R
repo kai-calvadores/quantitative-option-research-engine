@@ -1,4 +1,4 @@
-# This code is for generating the strategies for my option trading engine.
+# This code is for generating the strategies for my option research engine.
 
 LC_Generation = function(asset.data){
   option.chain = asset.data$option.chain
